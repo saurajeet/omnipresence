@@ -1,0 +1,385 @@
+
+#ifndef _SHOWSTATUSGTK_H_
+	#define _SHOWSTATUSGTK_H_
+/*
+INCLUDE GLIBC HEADERS
+#include <stdio.h>
+#include <gtk/gtk.h>
+#include<mysql/mysql.h>
+END INCLUSION
+*/
+const char *value;
+char str[10]="";
+char day[10]="1";
+char mon[10]="1";
+char year[10]="9";
+char status[10]="";
+int flag=0,d1,d2,d3;
+GtkWidget *hbox2;
+GtkWidget *hbox3;
+
+void window_1();
+void window_2();
+void window_3();
+
+static void switch_win(GtkWidget *widget, GtkWidget *window)
+{
+	gtk_widget_hide(window);
+	window_1();
+}
+
+void returnStatus()
+{
+	char retstr[1024]="",query[1024]="select attend";
+	MYSQL *conn;
+	MYSQL_RES *res;
+	MYSQL_ROW row;
+	int t;
+	char * server = "localhost";
+	printf("\nSHOWSTAT:: ReturnStatus  ");
+	if(d1<10)
+		strcat(query,"0");
+	strcat(query,day);
+	strcat(query," from ");
+	strcat(query,"attendanceSheet");
+	if(d2<10)
+                strcat(query,"0");
+	strcat(query,mon);
+	if(d3<10)
+                strcat(query,"0");
+	strcat(query,year);
+	strcat(query,",workersDB  where workersDB.empID='");
+	strcat(query,value);
+	strcat(query,"' and workersDB.rNad=");
+	strcat(query,"attendanceSheet");
+	if(d2<10)
+                strcat(query,"0");
+	strcat(query,mon);
+	if(d3<10)
+                strcat(query,"0");
+	strcat(query,year);
+	strcat(query,".rNAD ");
+	
+
+	conn=mysql_init(NULL);
+	if(!mysql_real_connect(conn, server, user, password, "omniPresence",0,NULL,0))
+	{
+		printf("\nSHOWSTAT:: Error in connection...............");
+		return ;
+	}
+	
+	t=mysql_query(conn,query);
+	if(t)
+	{
+		printf("\nSHOWSTAT:: Error in query");
+		return ;
+	}
+	
+	res=mysql_use_result(conn);
+	row=mysql_fetch_row(res);
+	if(row)
+	{
+		flag=1;
+		strcpy(retstr,row[0]);
+		
+		switch(retstr[0])
+		{
+			case 'P':
+				strcpy(status,"present");
+				break;
+			case 'A':
+				strcpy(status,"absent");
+				break;
+			case 'L':
+				strcpy(status,"on leave");
+				break;
+			default :
+				strcpy(status,"holiday");
+		}
+		
+	}
+           	
+	mysql_close(conn);
+	
+}
+	
+
+static void get_entry(GtkWidget *widget, GtkWidget *entry)
+{	
+        value=gtk_entry_get_text(GTK_ENTRY(entry));
+}
+
+static void get_spin_val_1(GtkWidget *widget, GtkWidget *spinner)
+{
+	d1=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON(spinner));
+	sprintf(day,"%d",d1);		
+}
+
+static void get_spin_val_2(GtkWidget *widget, GtkWidget *spinner)
+{
+	d2=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON(spinner));
+	sprintf(mon,"%d",d2);   
+}
+
+static void get_spin_val_3(GtkWidget *widget, GtkWidget *spinner)
+{
+        d3=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON(spinner));
+	d3=d3%100;
+	sprintf(year,"%d",d3);
+}
+
+static void find_status(GtkWidget *widget,GtkWidget *window)
+{	
+	gtk_widget_hide(window);
+	
+	if(value)
+	{
+		returnStatus();
+		window_2();
+		if(flag==1)
+	        	gtk_widget_hide(hbox2);
+		
+		else
+	             	gtk_widget_hide(hbox3);		
+	}
+	else
+		window_3();
+}
+
+
+
+void window_1()
+{
+	GtkWidget *window;
+	GtkWidget *frame;
+	GtkWidget *hbox;
+	GtkWidget *main_vbox;
+	GtkWidget *vbox;
+	GtkWidget *vbox2;
+	GtkWidget *spinner;
+	GtkWidget *button;
+	GtkWidget *label;
+	GtkWidget *entry;
+	GtkWidget *separator;
+	GtkAdjustment *adj;
+  /* Initialise GTK */	
+
+	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+	g_signal_connect (G_OBJECT (window), "destroy", G_CALLBACK (gtk_main_quit), NULL);
+	gtk_window_set_title (GTK_WINDOW (window), "Attendance Status");
+
+	main_vbox = gtk_vbox_new (FALSE, 5);
+	gtk_container_set_border_width (GTK_CONTAINER (main_vbox), 10);
+	gtk_container_add (GTK_CONTAINER (window), main_vbox);
+
+	frame = gtk_frame_new ("Select date");
+	gtk_box_pack_start (GTK_BOX (main_vbox), frame, TRUE, TRUE, 0);
+
+	vbox = gtk_vbox_new (FALSE, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (vbox), 5);
+	gtk_container_add (GTK_CONTAINER (frame), vbox);
+
+  /* Day, month, year spinners */
+	hbox = gtk_hbox_new (FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 5);
+
+	vbox2 = gtk_vbox_new (FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), vbox2, TRUE, TRUE, 5);
+
+	label = gtk_label_new ("Day :");
+	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	gtk_box_pack_start (GTK_BOX (vbox2), label, FALSE, TRUE, 0);
+
+	adj = (GtkAdjustment *) gtk_adjustment_new (1.0, 1.0, 31.0, 1.0, 5.0, 0.0);
+
+	spinner = gtk_spin_button_new (adj, 0, 0);
+	gtk_spin_button_set_wrap (GTK_SPIN_BUTTON (spinner), TRUE);
+	gtk_box_pack_start (GTK_BOX (vbox2), spinner, FALSE, TRUE, 0);
+	g_signal_connect(G_OBJECT(adj),"value_changed",G_CALLBACK(get_spin_val_1),(gpointer)spinner);
+
+	vbox2 = gtk_vbox_new (FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), vbox2, TRUE, TRUE, 5);
+
+	label = gtk_label_new ("Month :");
+	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	gtk_box_pack_start (GTK_BOX (vbox2), label, FALSE, TRUE, 0);
+
+	adj = (GtkAdjustment *) gtk_adjustment_new (1.0, 1.0, 12.0, 1.0, 5.0, 0.0);
+
+	spinner = gtk_spin_button_new (adj, 0, 0);
+	gtk_spin_button_set_wrap (GTK_SPIN_BUTTON (spinner), TRUE);
+	gtk_box_pack_start (GTK_BOX (vbox2), spinner, FALSE, TRUE, 0);
+	g_signal_connect(G_OBJECT(adj),"value_changed",G_CALLBACK(get_spin_val_2),(gpointer)spinner);
+
+	vbox2 = gtk_vbox_new (FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), vbox2, TRUE, TRUE, 5);
+
+	label = gtk_label_new ("Year :");
+	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	gtk_box_pack_start (GTK_BOX (vbox2), label, FALSE, TRUE, 0);
+
+	adj = (GtkAdjustment *) gtk_adjustment_new (2009.0, 2001.0, 2099.0, 1.0, 100.0, 0.0);
+
+	spinner = gtk_spin_button_new (adj, 0, 0);
+	gtk_spin_button_set_wrap (GTK_SPIN_BUTTON (spinner), FALSE);
+	gtk_widget_set_size_request (spinner, 55, -1);
+	gtk_box_pack_start (GTK_BOX (vbox2), spinner, FALSE, TRUE, 0);
+	g_signal_connect(G_OBJECT(adj),"value_changed",G_CALLBACK(get_spin_val_3),(gpointer)spinner);
+
+	separator=gtk_hseparator_new();
+	gtk_box_pack_start(GTK_BOX(main_vbox),separator,TRUE,TRUE,5);
+
+	hbox=gtk_hbox_new(FALSE,0);
+	gtk_box_pack_start(GTK_BOX(main_vbox), hbox,TRUE,TRUE,5);
+
+	label=gtk_label_new("Enter employee ID");
+	gtk_box_pack_start(GTK_BOX(hbox),label,FALSE,FALSE,5);
+
+	entry=gtk_entry_new();
+	gtk_entry_set_max_length(GTK_ENTRY(entry),50);
+	gtk_box_pack_start(GTK_BOX(hbox),entry,FALSE,FALSE,5);
+	g_signal_connect(G_OBJECT(entry),"changed",G_CALLBACK(get_entry),(gpointer)entry);
+
+	separator=gtk_hseparator_new();
+	gtk_box_pack_start(GTK_BOX(main_vbox),separator,TRUE,TRUE,5);
+
+	hbox = gtk_hbox_new (FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (main_vbox), hbox, TRUE, TRUE, 5);
+
+	button=gtk_button_new_with_label("Find status");
+	g_signal_connect(G_OBJECT(button),"clicked",G_CALLBACK(find_status),window);
+	gtk_box_pack_start(GTK_BOX(hbox),button,FALSE,FALSE,5);
+
+	button = gtk_button_new_with_label ("(X) Close");
+	g_signal_connect(G_OBJECT (button), "clicked", G_CALLBACK (gtk_main_quit), G_OBJECT (window));
+	gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 5);
+	gtk_widget_show_all (window);
+  
+}
+
+void window_2()
+{
+	GtkWidget *window;
+	GtkWidget *vbox;
+	GtkWidget *vbox1;
+	GtkWidget *hbox;
+	GtkWidget *label;
+	GtkWidget *button;
+	GtkWidget *separator;
+		
+	window=gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_title(GTK_WINDOW(window),"Show Status :: omniPresence");
+	gtk_container_set_border_width(GTK_CONTAINER(window),10);
+	g_signal_connect(G_OBJECT(window),"destroy",G_CALLBACK(gtk_main_quit),NULL);
+	
+	vbox=gtk_vbox_new(FALSE,0);
+	gtk_container_add(GTK_CONTAINER(window),vbox);
+
+	hbox2=gtk_hbox_new(FALSE,0);
+        gtk_box_pack_start(GTK_BOX(vbox),hbox2,TRUE,TRUE,5);
+
+        label=gtk_label_new("No entry in database");
+        gtk_box_pack_start(GTK_BOX(hbox2),label,FALSE,FALSE,5);
+
+	hbox3=gtk_hbox_new(FALSE,0);
+        gtk_box_pack_start(GTK_BOX(vbox),hbox3,TRUE,TRUE,5);
+
+	vbox1=gtk_vbox_new(FALSE,0);
+        gtk_box_pack_start(GTK_BOX(hbox3),vbox1,TRUE,TRUE,5);
+
+	hbox=gtk_hbox_new(FALSE,0);
+        gtk_box_pack_start(GTK_BOX(vbox1),hbox,TRUE,TRUE,5);
+
+        label=gtk_label_new("EMPID      :");
+        gtk_box_pack_start(GTK_BOX(hbox),label,FALSE,FALSE,5);
+
+	label=gtk_label_new(value);
+        gtk_box_pack_start(GTK_BOX(hbox),label,FALSE,FALSE,5);
+
+	hbox=gtk_hbox_new(FALSE,0);
+        gtk_box_pack_start(GTK_BOX(vbox1),hbox,TRUE,TRUE,5);
+
+        label=gtk_label_new("DATE       :");
+        gtk_box_pack_start(GTK_BOX(hbox),label,FALSE,FALSE,5);
+
+        label=gtk_label_new(day);
+        gtk_box_pack_start(GTK_BOX(hbox),label,FALSE,FALSE,5);
+	
+	label=gtk_label_new("/");
+        gtk_box_pack_start(GTK_BOX(hbox),label,FALSE,FALSE,5);
+
+	label=gtk_label_new(mon);
+        gtk_box_pack_start(GTK_BOX(hbox),label,FALSE,FALSE,5);
+
+	label=gtk_label_new("/");
+        gtk_box_pack_start(GTK_BOX(hbox),label,FALSE,FALSE,5);
+
+	label=gtk_label_new(year);
+        gtk_box_pack_start(GTK_BOX(hbox),label,FALSE,FALSE,5);
+
+	hbox=gtk_hbox_new(FALSE,0);
+        gtk_box_pack_start(GTK_BOX(vbox1),hbox,TRUE,TRUE,5);
+
+	label=gtk_label_new("STATUS   : ");
+	gtk_box_pack_start(GTK_BOX(hbox),label,FALSE,FALSE,5);
+
+	label=gtk_label_new(status);
+        gtk_box_pack_start(GTK_BOX(hbox),label,FALSE,FALSE,5);
+
+	hbox=gtk_hbox_new(FALSE,0);
+        gtk_box_pack_start(GTK_BOX(vbox),hbox,FALSE,TRUE,5);
+
+	button=gtk_button_new_with_label("(<<) Back");
+	gtk_box_pack_start(GTK_BOX(hbox),button,FALSE,FALSE,5);
+	g_signal_connect(G_OBJECT(button),"clicked",G_CALLBACK(switch_win),(gpointer)(window));
+
+	button=gtk_button_new_with_label("(X) Close");
+        gtk_box_pack_end(GTK_BOX(hbox),button,FALSE,FALSE,5);
+	g_signal_connect(G_OBJECT(button),"clicked",G_CALLBACK(gtk_main_quit),G_OBJECT(window));
+	gtk_widget_show_all(window);
+}
+
+void window_3()
+{
+	GtkWidget *window;
+        GtkWidget *vbox;
+        GtkWidget *hbox;
+        GtkWidget *label;
+        GtkWidget *button;
+        GtkWidget *separator;
+
+        window=gtk_window_new(GTK_WINDOW_TOPLEVEL);
+        gtk_window_set_title(GTK_WINDOW(window),"Show Status :: omniPresence");
+        gtk_container_set_border_width(GTK_CONTAINER(window),10);
+        g_signal_connect(G_OBJECT(window),"distroy",G_CALLBACK(gtk_main_quit),NULL);
+
+	vbox=gtk_vbox_new(FALSE,0);
+        gtk_container_add(GTK_CONTAINER(window),vbox);
+
+        hbox=gtk_hbox_new(FALSE,0);
+        gtk_box_pack_start(GTK_BOX(vbox),hbox,TRUE,TRUE,5);
+
+        label=gtk_label_new("Employee ID  is empty.");
+        gtk_box_pack_start(GTK_BOX(hbox),label,FALSE,FALSE,5);
+
+        hbox=gtk_hbox_new(FALSE,0);
+        gtk_box_pack_start(GTK_BOX(vbox),hbox,TRUE,TRUE,5);
+
+	button=gtk_button_new_with_label("(<<) Back");
+        gtk_box_pack_start(GTK_BOX(hbox),button,FALSE,FALSE,5);
+        g_signal_connect(G_OBJECT(button),"clicked",G_CALLBACK(switch_win),(gpointer)(window));
+
+        button=gtk_button_new_with_label("(X) Close");
+        gtk_box_pack_end(GTK_BOX(hbox),button,FALSE,FALSE,5);
+        g_signal_connect(G_OBJECT(button),"clicked",G_CALLBACK(gtk_main_quit),G_OBJECT(window));
+        
+	gtk_widget_show_all(window);
+}
+
+int showStatusGTKMain()
+{	window_1();
+	gtk_main();
+	return 0;
+}
+
+#endif //_SHOWSTATUSGTK_H_

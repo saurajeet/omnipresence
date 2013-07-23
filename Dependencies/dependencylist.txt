@@ -1,0 +1,420 @@
+.:
+dependencylist.txt
+glitz-0.5.6-185.1.i586.rpm
+gnapplet-0.6.22.tar.gz
+gnapplet.sis
+gnocky-0.0.7.tar.gz
+gnokii-0.6.14-27.i586.rpm
+gnokiirc
+gtkhtml2-3.10.0-54.1.i586.rpm
+gtkhtml-3.24.0.tar.gz
+intltool-0.40.5-1.13.noarch.rpm
+kde4-kdialog-4.0.4-18.1.i586.rpm
+kdialog-4.2.0.ebuild
+libgnomeprintui-2.18.3-1.21.i586.rpm
+libgnomeuimm-2.24.0-1.32.i586.rpm
+libgtkhtml-2.11.1-63.79.i586.rpm
+my sql suse
+openmoko-armv4t-linux-gnueabi-toolchain-openmoko-20080500-4.2.i686.rpm
+
+./my sql suse:
+client
+ConnectivityODBCDriver
+guitools
+headers and libraries
+jdbcConnect
+MySQL-server-community-5.1.30-0.sles10.i586.rpm
+shared compatibility libraries
+sharedlibraries
+test suite
+
+./my sql suse/client:
+MySQL-client-community-5.1.30-0.sles10.i586.rpm
+
+./my sql suse/ConnectivityODBCDriver:
+mysql-connector-odbc-5.1.5-0.i386.rpm
+sesam_srv-3.0.1-136.1.i586.rpm
+unixODBC-2.2.11-1.i386.rpm
+unixODBC-2.2.14-linux-x86-32.tar
+unixODBC-gui-gtk-2.2.11-1.i386.rpm
+
+./my sql suse/guitools:
+mysql-administrator-5.0r12-1suse10.i586.rpm
+mysql-gui-tools-5.0r12-1suse10.i586.rpm
+mysql-gui-tools-5.0r12-suse10-i386.tar.gz
+mysql-migration-toolkit-5.0r12-1suse10.i586.rpm
+mysql-query-browser-5.0r12-1suse10.i586.rpm
+
+./my sql suse/headers and libraries:
+MySQL-devel-community-5.1.30-0.sles10.i586.rpm
+
+./my sql suse/jdbcConnect:
+build.xml
+changes
+copying
+docs
+EXCEPTIONS-CONNECTOR-J
+mysql-connector-java-5.0.8
+mysql-connector-java-5.0.8.zip
+mysql-connector-java-5.1.7-bin.jar
+mysql-connector-java-5.1.7.tar
+readme
+README.txt
+src
+
+./my sql suse/jdbcConnect/docs:
+connector-j.html
+connector-j.pdf
+readme
+README.txt
+
+./my sql suse/jdbcConnect/mysql-connector-java-5.0.8:
+mysql-connector-java-5.0.8-bin.jar
+
+./my sql suse/jdbcConnect/src:
+com
+doc
+lib
+org
+testsuite
+
+./my sql suse/jdbcConnect/src/com:
+mysql
+
+./my sql suse/jdbcConnect/src/com/mysql:
+jdbc
+
+./my sql suse/jdbcConnect/src/com/mysql/jdbc:
+AssertionFailedException.java
+BalanceStrategy.java
+BestResponseTimeBalanceStrategy.java
+BlobFromLocator.java
+Blob.java
+Buffer.java
+BufferRow.java
+ByteArrayRow.java
+CachedResultSetMetaData.java
+CallableStatement.java
+CharsetMapping.java
+Charsets.properties
+Clob.java
+CommunicationsException.java
+CompressedInputStream.java
+configs
+ConnectionFeatureNotAvailableException.java
+ConnectionImpl.java
+Connection.java
+ConnectionLifecycleInterceptor.java
+ConnectionPropertiesImpl.java
+ConnectionProperties.java
+ConnectionPropertiesTransform.java
+Constants.java
+DatabaseMetaData.java
+DatabaseMetaDataUsingInfoSchema.java
+DocsConnectionPropsHelper.java
+Driver.java
+EscapeProcessor.java
+EscapeProcessorResult.java
+EscapeTokenizer.java
+exceptions
+ExportControlled.java
+Extension.java
+Field.java
+integration
+interceptors
+IterateBlock.java
+jdbc2
+JDBC4CallableStatement.java
+JDBC4ClientInfoProvider.java
+JDBC4ClientInfoProviderSP.java
+JDBC4CommentClientInfoProvider.java
+JDBC4Connection.java
+JDBC4DatabaseMetaData.java
+JDBC4DatabaseMetaDataUsingInfoSchema.java
+JDBC4MysqlSQLXML.java
+JDBC4NClob.java
+JDBC4PreparedStatementHelper.java
+JDBC4PreparedStatement.java
+JDBC4ResultSet.java
+JDBC4ServerPreparedStatement.java
+JDBC4UpdatableResultSet.java
+LicenseConfiguration.java
+LoadBalancingConnectionProxy.java
+LocalizedErrorMessages.properties
+log
+Messages.java
+MiniAdmin.java
+MysqlDataTruncation.java
+MysqlDefs.java
+MysqlErrorNumbers.java
+MysqlIO.java
+MysqlParameterMetadata.java
+MysqlSavepoint.java
+NamedPipeSocketFactory.java
+NonRegisteringDriver.java
+NonRegisteringReplicationDriver.java
+NotImplemented.java
+NotUpdatable.java
+OperationNotSupportedException.java
+OutputStreamWatcher.java
+PacketTooBigException.java
+ParameterBindings.java
+PingTarget.java
+PreparedStatement.java
+profiler
+RandomBalanceStrategy.java
+ReplicationConnection.java
+ReplicationDriver.java
+ResultSetImpl.java
+ResultSetInternalMethods.java
+ResultSetMetaData.java
+ResultSetRow.java
+RowDataCursor.java
+RowDataDynamic.java
+RowData.java
+RowDataKeyset.java
+RowDataStatic.java
+Security.java
+ServerPreparedStatement.java
+SingleByteCharsetConverter.java
+SocketFactory.java
+SQLError.java
+StandardSocketFactory.java
+StatementImpl.java
+StatementInterceptor.java
+Statement.java
+StreamingNotifiable.java
+StringUtils.java
+TimeUtil.java
+trace
+UpdatableResultSet.java
+util
+Util.java
+WatchableOutputStream.java
+WatchableWriter.java
+webapp
+WriterWatcher.java
+
+./my sql suse/jdbcConnect/src/com/mysql/jdbc/configs:
+3-0-Compat.properties
+5-0-Compat.properties
+clusterBase.properties
+coldFusion.properties
+fullDebug.properties
+maxPerformance.properties
+solarisMaxPerformance.properties
+
+./my sql suse/jdbcConnect/src/com/mysql/jdbc/exceptions:
+DeadlockTimeoutRollbackMarker.java
+jdbc4
+MySQLDataException.java
+MySQLIntegrityConstraintViolationException.java
+MySQLInvalidAuthorizationSpecException.java
+MySQLNonTransientConnectionException.java
+MySQLNonTransientException.java
+MySQLStatementCancelledException.java
+MySQLSyntaxErrorException.java
+MySQLTimeoutException.java
+MySQLTransactionRollbackException.java
+MySQLTransientConnectionException.java
+MySQLTransientException.java
+
+./my sql suse/jdbcConnect/src/com/mysql/jdbc/exceptions/jdbc4:
+CommunicationsException.java
+MySQLDataException.java
+MySQLIntegrityConstraintViolationException.java
+MySQLInvalidAuthorizationSpecException.java
+MySQLNonTransientConnectionException.java
+MySQLNonTransientException.java
+MySQLSyntaxErrorException.java
+MySQLTimeoutException.java
+MySQLTransactionRollbackException.java
+MySQLTransientConnectionException.java
+MySQLTransientException.java
+
+./my sql suse/jdbcConnect/src/com/mysql/jdbc/integration:
+c3p0
+jboss
+
+./my sql suse/jdbcConnect/src/com/mysql/jdbc/integration/c3p0:
+MysqlConnectionTester.java
+
+./my sql suse/jdbcConnect/src/com/mysql/jdbc/integration/jboss:
+ExtendedMysqlExceptionSorter.java
+MysqlValidConnectionChecker.java
+
+./my sql suse/jdbcConnect/src/com/mysql/jdbc/interceptors:
+ResultSetScannerInterceptor.java
+ServerStatusDiffInterceptor.java
+SessionAssociationInterceptor.java
+
+./my sql suse/jdbcConnect/src/com/mysql/jdbc/jdbc2:
+optional
+
+./my sql suse/jdbcConnect/src/com/mysql/jdbc/jdbc2/optional:
+CallableStatementWrapper.java
+ConnectionWrapper.java
+JDBC4CallableStatementWrapper.java
+JDBC4ConnectionWrapper.java
+JDBC4MysqlPooledConnection.java
+JDBC4MysqlXAConnection.java
+JDBC4PreparedStatementWrapper.java
+JDBC4StatementWrapper.java
+JDBC4SuspendableXAConnection.java
+MysqlConnectionPoolDataSource.java
+MysqlDataSourceFactory.java
+MysqlDataSource.java
+MysqlPooledConnection.java
+MysqlXAConnection.java
+MysqlXADataSource.java
+MysqlXAException.java
+MysqlXid.java
+PreparedStatementWrapper.java
+StatementWrapper.java
+SuspendableXAConnection.java
+WrapperBase.java
+
+./my sql suse/jdbcConnect/src/com/mysql/jdbc/log:
+CommonsLogger.java
+Jdk14Logger.java
+Log4JLogger.java
+LogFactory.java
+Log.java
+LogUtils.java
+NullLogger.java
+StandardLogger.java
+
+./my sql suse/jdbcConnect/src/com/mysql/jdbc/profiler:
+LoggingProfilerEventHandler.java
+ProfilerEventHandlerFactory.java
+ProfilerEventHandler.java
+ProfilerEvent.java
+
+./my sql suse/jdbcConnect/src/com/mysql/jdbc/trace:
+Tracer.aj
+
+./my sql suse/jdbcConnect/src/com/mysql/jdbc/util:
+BaseBugReport.java
+ErrorMappingsDocGenerator.java
+LRUCache.java
+PropertiesDocGenerator.java
+ReadAheadInputStream.java
+ResultSetUtil.java
+ServerController.java
+TimezoneDump.java
+VersionFSHierarchyMaker.java
+
+./my sql suse/jdbcConnect/src/com/mysql/jdbc/webapp:
+
+./my sql suse/jdbcConnect/src/doc:
+sources
+
+./my sql suse/jdbcConnect/src/doc/sources:
+connPropsToDocbook.xsl
+errorMapToDocbook.xsl
+placeholder.txt
+pom.xml
+
+./my sql suse/jdbcConnect/src/lib:
+ant-contrib.jar
+aspectjrt.jar
+aspectjtools.jar
+c3p0-0.9.1-pre6.jar
+c3p0-LICENSE
+commons-logging.jar
+Commons-Logging-LICENSE.txt
+jboss-common-jdbc-wrapper.jar
+jboss-lgpl.txt
+jdbc2_0-stdext.jar
+jta-spec1_0_1.jar
+junit.jar
+LICENSE-AspectJ.html
+log4j-1.2.9.jar
+
+./my sql suse/jdbcConnect/src/org:
+gjt
+
+./my sql suse/jdbcConnect/src/org/gjt:
+mm
+
+./my sql suse/jdbcConnect/src/org/gjt/mm:
+mysql
+
+./my sql suse/jdbcConnect/src/org/gjt/mm/mysql:
+Driver.java
+
+./my sql suse/jdbcConnect/src/testsuite:
+BaseTestCase.java
+perf
+regression
+simple
+ssl-test-certs
+UnreliableSocketFactory.java
+
+./my sql suse/jdbcConnect/src/testsuite/perf:
+BasePerfTest.java
+LoadStorePerfTest.java
+RetrievalPerfTest.java
+
+./my sql suse/jdbcConnect/src/testsuite/regression:
+AppletRegressionTest.java
+BlobRegressionTest.java
+CachedRowsetTest.java
+CallableStatementRegressionTest.java
+ConnectionRegressionTest.java
+DataSourceRegressionTest.java
+EscapeProcessorRegressionTest.java
+MetaDataRegressionTest.java
+MicroPerformanceRegressionTest.java
+NumbersRegressionTest.java
+PooledConnectionRegressionTest.java
+ResultSetRegressionTest.java
+StatementRegressionTest.java
+StressRegressionTest.java
+StringRegressionTest.java
+SubqueriesRegressionTest.java
+
+./my sql suse/jdbcConnect/src/testsuite/simple:
+BlobTest.java
+CallableStatementTest.java
+CharsetTests.java
+ConnectionTest.java
+DataSourceTest.java
+DateTest.java
+EscapeProcessingTest.java
+jdbc4
+MetadataTest.java
+MiniAdminTest.java
+NumbersTest.java
+ReadOnlyCallableStatementTest.java
+ResultSetTest.java
+ServerControllerTest.java
+SimpleTransformer.java
+SSLTest.java
+StatementsTest.java
+tb2-data.txt.gz
+TestLifecycleInterceptor.java
+TransactionTest.java
+TraversalTest.java
+UpdatabilityTest.java
+XATest.java
+
+./my sql suse/jdbcConnect/src/testsuite/simple/jdbc4:
+StatementsTest.java
+
+./my sql suse/jdbcConnect/src/testsuite/ssl-test-certs:
+ca-cert.pem
+ca-key.pem
+server-cert.pem
+server-key.pem
+server-req.pem
+test-cert-store
+
+./my sql suse/shared compatibility libraries:
+MySQL-shared-compat-5.1.30-0.sles10.i586.rpm
+
+./my sql suse/sharedlibraries:
+MySQL-shared-community-5.1.30-0.sles10.i586.rpm
+
+./my sql suse/test suite:
+MySQL-test-community-5.1.30-0.sles10.i586.rpm

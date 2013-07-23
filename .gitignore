@@ -1,0 +1,7 @@
+*/*.sql
+*/*.tar.gz
+*/*.rpm
+*/*.java
+Dependencies/my sql suse/
+Dependencies/g*
+Dependencies/k*
